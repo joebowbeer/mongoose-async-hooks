@@ -82,6 +82,6 @@ describe('Examples', function() {
     };
 
     // node>=9.6.0
-    it('scope mode', getAssertFn('scope', 'MyModel'));
+    it('scope mode', getAssertFn('scope', 'MyAnotherModel'));
   });
 });
