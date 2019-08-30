@@ -18,7 +18,7 @@ describe('Examples', function() {
 
   describe('integrates with Node.js async hooks', function () {
     const getAssertFn = (mode, myModelName) => {
-      return done => {
+      return async () => {
         const types = [];
         const hooks = {
           init: (asyncId, type) => {
@@ -36,16 +36,11 @@ describe('Examples', function() {
         const MyModel = mongoose.model(myModelName, schema);
 
         asyncHook.enable();
-
         const doc = new MyModel({ name: 'test' });
-        doc.save(function(error, doc) {
-          asyncHook.disable();
+        await doc.save()
+        asyncHook.disable();
 
-          assert.ok(types.includes('mongoose.' + myModelName));
-          // acquit:ignore:start
-          done();
-          // acquit:ignore:end
-        });
+        assert.ok(types.includes('mongoose.' + myModelName));
       };
     };
 
