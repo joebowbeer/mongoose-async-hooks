@@ -8,11 +8,11 @@ const mongooseAsyncHooks = require('../');
 const { Schema } = mongoose;
 
 describe('Examples', function() {
-  before(function() {
-    mongoose.connect('mongodb://localhost:27017/asynchooks', { useNewUrlParser: true });
+  beforeEach(function() {
+    return mongoose.connect('mongodb://localhost:27017/asynchooks', { useNewUrlParser: true });
   });
 
-  after(function() {
+  afterEach(function() {
     return mongoose.disconnect();
   });
 
